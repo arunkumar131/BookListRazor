@@ -1,5 +1,7 @@
+using BookListRazor.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +20,8 @@ namespace BookListRazor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Implemented the SQL connection
+            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Added AddRazorRuntimeCompilation for updating the code changes during runtime
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
