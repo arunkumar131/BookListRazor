@@ -22,6 +22,8 @@ namespace BookListRazor
         {
             //Implemented the SQL connection
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           
+            services.AddControllersWithViews();
             // Added AddRazorRuntimeCompilation for updating the code changes during runtime
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
@@ -46,6 +48,7 @@ namespace BookListRazor
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
